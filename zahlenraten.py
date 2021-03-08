@@ -10,7 +10,7 @@ Created on Fri Mar  5 09:53:18 2021
 ###############################################################################
 
 # Did not get: "Fuehren Sie fuer die Eingabe der Zahl eine Ausnahmebedingung
-# ein.
+# ein (ASK TUTOR).
 
 ###############################################################################
 
@@ -28,7 +28,7 @@ def ascii_convert(string):
         conv.append(ord(x))
     return(conv)
 
-# BOOLEAN: Check if a string is a number, and if yes, check the range
+# BOOLEAN: Check if a string is a number within the correct range
 
 def checkif_nr(tocheck):
     if str.isdigit(tocheck) == True:
@@ -41,7 +41,7 @@ def checkif_nr(tocheck):
         return(False)
 
     
-# BOOLEAN: Check if characters are allowed in general
+# BOOLEAN: If it's not a number, check if characters are allowed
 
 def checkif_ascii_space(tocheck):
     
@@ -80,7 +80,7 @@ win_nr = input("#########################################################" +
 if checkif_ascii_space(ascii_convert(win_nr)) == False:
     sys.exit("Possible characters not used, terminating program.")
     
-#%% Obtain attempt number
+#%% Obtain number of attempts
 attemptnr = input("How many attempts used (Number 0 to 100 possible)?\n")
 
 #%% Terminate if it is not a number between 0 and 100
@@ -88,7 +88,6 @@ if checkif_nr(attemptnr) == False:
     sys.exit("Impossible attempt nr. or input type.")
 
 #%% Check whether the program is about numbers or not -------------------------
-
 if checkif_nr(win_nr) == True:
 
 #%% Game with number ----------------------------------------------------------
@@ -105,18 +104,26 @@ if checkif_nr(win_nr) == True:
     
     while run_bool == True:
         usertry += 1
+        
+        # Check if number of attempts is low enough to proceed
         if usertry <= int(attemptnr):
+                        
             guess_nr = input("What number is right?" +
                              "\n" +
                              "Attempts left: " +
                              str(int(attemptnr) - usertry + 1) +
                              "\n"
             )
-        
+
+            # If the provided number is correct...   
             if str.isdigit(guess_nr) == True:
+                
+                # ... tell the user the success
                 if guess_nr == win_nr:
                     run_bool = False                
-                    print("\n\nYou win the game!")            
+                    print("\n\nYou win the game!")
+                    
+                # ... if not, we check whether input is higher/lower
                 else: 
                     if int(guess_nr) < int(win_nr):
                         print("\n\nNumber too small!")
@@ -127,7 +134,12 @@ if checkif_nr(win_nr) == True:
         else:
             run_bool = False
             print("\n\nToo many attempts. Game over.")
-            
+
+#%% Game with characters ------------------------------------------------------
+
+# Game reveals more characters every input iteration. Code a small derivative
+# of the one from the game above.
+
 else:
     
     usertry = 0

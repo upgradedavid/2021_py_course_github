@@ -5,13 +5,16 @@ Created on Fri Mar  5 14:29:12 2021
 @author: daviv
 """
 
+#%% Part provided at start of excersise ---------------------------------------
+
 print("*********")
 print("P O K E R")
 print("*********")
 print("EINGABE IHRER KARTEN")
-print("Geben Sie die Karten sortiert nach der Wertigkeit ein (hohe Wertigkeit vor tiefer Wertigkeit):")
+print("Geben Sie die Karten sortiert nach der Wertigkeit ein (hohe Wertigkeit+"
+      " vor tiefer Wertigkeit):"
+)
 print()
-
 
 wert1 = int(input("1. Wert: "))
 farbe1 = int(input("1. Farbe: "))
@@ -23,6 +26,7 @@ wert4 = int(input("4. Wert: "))
 farbe4 = int(input("4. Farbe: "))
 wert5 = int(input("5. Wert: "))
 farbe5 = int(input("5. Farbe: "))
+
 print()
 print("Sie haben eingegeben:")
 print("Karte 1 (Wert|Farbe):", wert1, farbe1)
@@ -31,7 +35,7 @@ print("Karte 3 (Wert|Farbe):", wert3, farbe3)
 print("Karte 4 (Wert|Farbe):", wert4, farbe4)
 print("Karte 5 (Wert|Farbe):", wert5, farbe5)
 
-#%% let's make two lists of our input
+#%% Let's create two lists of our input ---------------------------------------
 
 werte = sorted([wert1,
                 wert2,
@@ -48,34 +52,38 @@ farbe = [farbe1,
          farbe5
 ]
 
-#%% Adjust to lowest number to check sequence
+#%% Adjust to lowest number to check whether it is a sequence -----------------
 
 werte_adj = list()
 for x in werte:
-    werte_adj.append(x - min(werte))    
+    werte_adj.append(x - min(werte))
 
 sequence_bool = False
 if max(werte_adj) == 4:
     sequence_bool = True
     
-#%% Does the sequence have only one colour?
+#%% Does the sequence have only one colour? -----------------------------------
 
 allcolour_bool = False
+
+# Set cannot have duplicates, conversion removes them
 if len(set(farbe)) == 1:
     allcolour_bool = True
     
-#%% How many different cards are there?
+#%% How many different cards are there? ---------------------------------------
 
 handscheck = list()
 handscheck.append(1)
 
+# length of list shows number of different cards
+# number in each position shows number of cards
+
 for x in range(0,4):
+    
     if werte[x] == werte[x+1]:
         handscheck[len(handscheck)-1] += 1
     else:
         handscheck.append(1)
-
-handscheck = sorted(handscheck)
 
 differentcards = len(handscheck)
 maxnrofsamecard = max(handscheck)
